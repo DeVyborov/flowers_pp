@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="Цветучено" Height="450" Width="800">
+        Title="Цветучено" Height="450" Width="800" Icon="/Assets/406865_flower_icon.png">
     <Grid>
         <Image Source="/Assets/colorful-roses-white.jpg" Stretch="Fill"/>
 
@@ -16,18 +16,18 @@
             <TextBlock Text="Логин:" Margin="0 0 230 50" HorizontalAlignment="Center" Foreground="Black" FontSize="16" VerticalAlignment="Center" FontFamily="Rockwell Extra "/>
             <TextBox x:Name="login_field" Width="280" HorizontalAlignment="Center" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1"/>
             <TextBlock Text="Пароль:" Margin="0 60 220 0" HorizontalAlignment="Center" Foreground="Black" FontSize="16" VerticalAlignment="Center" FontFamily="Rockwell Extra "/>
-            <PasswordBox x:Name="password_field" Margin="0 110 0 0"  Width="280" HorizontalAlignment="Center" Height="28" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1"/>
+            <PasswordBox x:Name="password_field" PasswordChar="●" Margin="0 110 0 0"  Width="280" HorizontalAlignment="Center" Height="28" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1"/>
 
-            <Button Style="{StaticResource visible_button}" Name="btn_sign" Cursor="Hand" Height="40" Width="135" HorizontalAlignment="Center" Margin="0 200 145 0">
+            <Button Style="{StaticResource visible_button}" Name="btn_sign" Click="btn_sign_Click" Cursor="Hand" Height="40" Width="135" HorizontalAlignment="Center" Margin="0 200 145 0">
                 <Grid>
-                    <Border Background="#FF39FF29" Height="40" Width="150" HorizontalAlignment="Center"/>
+                    <Border Background="#FF39FF29" Height="40" Width="135" HorizontalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Background="Transparent" Text="Войти" FontFamily="Montserrat" FontWeight="SemiBold" FontSize="16" Foreground="Black" TextAlignment="Center"  Cursor="Hand"/>
                 </Grid>
             </Button>
 
-            <Button Style="{StaticResource visible_button}" Name="btn_registration" Cursor="Hand" Height="40" Width="135" HorizontalAlignment="Center" Margin="145 200 0 0">
+            <Button Style="{StaticResource visible_button}" Name="btn_registration" Click="btn_registration_Click" Cursor="Hand" Height="40" Width="135" HorizontalAlignment="Center" Margin="145 200 0 0">
                 <Grid>
-                    <Border Background="#FF39FF29" Height="40" Width="150" HorizontalAlignment="Center"/>
+                    <Border Background="#FF39FF29" Height="40" Width="135" HorizontalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Background="Transparent" Text="Регистрация" FontFamily="Montserrat" FontWeight="SemiBold" FontSize="16" Foreground="Black" TextAlignment="Center"  Cursor="Hand"/>
                 </Grid>
             </Button>
