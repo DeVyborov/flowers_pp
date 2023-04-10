@@ -54,7 +54,7 @@ namespace flowers_pp
                             SQLclass.CloseConnection();
 
                             this.Hide();
-                            CatalogWindow catalogWindow = new CatalogWindow();
+                            CatalogWindow catalogWindow = new CatalogWindow("1", "");
                             catalogWindow.Show();
                         }
                         else

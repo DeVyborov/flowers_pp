@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace flowers_pp
 {
@@ -38,7 +31,8 @@ namespace flowers_pp
 
         private void btn_basket_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(categoryId);
+            //CatalogWindow catalogWindow = new CatalogWindow("2", categoryId);
+            //catalogWindow.Show();
         }
 
         public CategoryPanel(string form_category_name, string form_category_photo, string form_category_id)

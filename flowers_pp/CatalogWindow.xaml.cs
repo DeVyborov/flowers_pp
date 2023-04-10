@@ -1,16 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace flowers_pp
 {
@@ -19,9 +9,12 @@ namespace flowers_pp
     /// </summary>
     public partial class CatalogWindow : Window
     {
-        public CatalogWindow()
+        string type_list, category_list = "";
+        public CatalogWindow(string form_type, string form_category)
         {
             InitializeComponent();
+            type_list = form_type;
+            category_list = form_category;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -29,17 +22,32 @@ namespace flowers_pp
             try
             {
                 SQLclass.OpenConnection();
-                int show = 0;
 
-                Fr.Children.Clear();
-                List<string> services = SQLclass.Select($"SELECT * FROM [dbo].[categories]");
-
-                for (int i = 0; i < services.Count; i += 3)
+                if (type_list == "1") // catalog
                 {
-                    CategoryPanel categoryPanel = new CategoryPanel(services[i+1], services[i + 2], services[i]);
-                    Fr.Children.Add(categoryPanel);
-                    show++;
+                    Fr.Children.Clear();
+                    List<string> services = SQLclass.Select($"SELECT * FROM [dbo].[categories]");
+
+                    for (int i = 0; i < services.Count; i += 3)
+                    {
+                        CategoryPanel categoryPanel = new CategoryPanel(services[i + 1], services[i + 2], services[i]);
+                        Fr.Children.Add(categoryPanel);
+                    }
                 }
+                else if (type_list == "2") // flower
+                {
+                    Fr.Children.Clear();
+                    List<string> services = SQLclass.Select($"SELECT * FROM [dbo].[items] WHERE id_categories = '" + category_list + "'");
+
+                    for (int i = 0; i < services.Count; i += 3)
+                    {
+                        FlowerPanel flowerPanel = new FlowerPanel(services[i], services[i + 1], services[i + 2], services[i + 3]);
+                        Fr.Children.Add(flowerPanel);
+                    }
+                }
+                else
+                    MessageBox.Show("Error");
+
                 SQLclass.CloseConnection();
             }
             catch (Exception ex)
