@@ -17,7 +17,7 @@ namespace flowers_pp
     /// <summary>
     /// Логика взаимодействия для CategoryPanel.xaml
     /// </summary>
-    public partial class CategoryPanel : Window
+    public partial class CategoryPanel : UserControl
     {
         public CategoryPanel()
         {

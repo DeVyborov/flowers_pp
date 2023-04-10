@@ -15,7 +15,7 @@ namespace flowers_pp
         {
             conn = new SqlConnection
             {
-                ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=flower;Integrated Security=True"
+                ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=flowers;Integrated Security=True"
             };
             conn.Open();
         }
