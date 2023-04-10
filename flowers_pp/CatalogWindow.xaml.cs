@@ -23,5 +23,29 @@ namespace flowers_pp
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SQLclass.OpenConnection();
+                int show = 0;
+
+                Fr.Children.Clear();
+                List<string> services = SQLclass.Select($"SELECT * FROM [dbo].[categories]");
+
+                for (int i = 0; i < services.Count; i += 3)
+                {
+                    CategoryPanel categoryPanel = new CategoryPanel(services[i+1], services[i + 2], services[i]);
+                    Fr.Children.Add(categoryPanel);
+                    show++;
+                }
+                SQLclass.CloseConnection();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

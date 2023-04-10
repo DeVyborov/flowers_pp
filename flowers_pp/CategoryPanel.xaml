@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:flowers_pp"
         mc:Ignorable="d"
-        Height="400" Width="280">
-    <Border Background="White" x:Name="back" CornerRadius="20" Margin="5">
+        Height="330" Width="260">
+    <Border Background="#FFC4C2A7" x:Name="back_main" CornerRadius="20" Margin="5">
         <Grid>
-            <Button Style="{StaticResource visible_button}" Name="btn_basket" Cursor="Hand" Height="370" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border Background="#FFC8A360" x:Name="back_extra" CornerRadius="20" Margin="5"/>
+            <Button  Style="{StaticResource visible_button}" Name="btn_basket" Click="btn_basket_Click" Cursor="Hand" Height="280" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" MouseEnter="btn_basket_MouseEnter" MouseLeave="btn_basket_MouseLeave">
                 <Grid>
-                    <Image x:Name="photo_category" Source="/Assets/top-view-pink-flower-with-drops.jpg" Margin="0 0 0 200" Stretch="Fill" />
+                    <Image x:Name="photo_category" Source="/Assets/top-view-pink-flower-with-drops.jpg" Margin="5,0,5,90" Stretch="Fill"/>
                     <TextBlock x:Name="title_category" VerticalAlignment="Bottom" Background="Transparent" Text="Свежесрезанные цветы" FontFamily="Montserrat" FontSize="16" Foreground="Black" TextAlignment="Center"  Cursor="Hand"/>
                 </Grid>
             </Button>
