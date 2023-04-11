@@ -31,8 +31,8 @@ namespace flowers_pp
 
         private void btn_basket_Click(object sender, RoutedEventArgs e)
         {
-            //CatalogWindow catalogWindow = new CatalogWindow("2", categoryId);
-            //catalogWindow.Show();
+            CatalogWindow catalogWindow = new CatalogWindow("2", categoryId);
+            catalogWindow.UpdateData(categoryId);
         }
 
         public CategoryPanel(string form_category_name, string form_category_photo, string form_category_id)

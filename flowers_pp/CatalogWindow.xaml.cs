@@ -39,7 +39,7 @@ namespace flowers_pp
                     Fr.Children.Clear();
                     List<string> services = SQLclass.Select($"SELECT * FROM [dbo].[items] WHERE id_categories = '" + category_list + "'");
 
-                    for (int i = 0; i < services.Count; i += 3)
+                    for (int i = 0; i < services.Count; i += 5)
                     {
                         FlowerPanel flowerPanel = new FlowerPanel(services[i], services[i + 1], services[i + 2], services[i + 3]);
                         Fr.Children.Add(flowerPanel);
@@ -54,6 +54,13 @@ namespace flowers_pp
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public void UpdateData(string category_id)
+        {
+            this.Close();
+            CatalogWindow catalog = new CatalogWindow("2", category_id);
+            catalog.Show();
         }
     }
 }

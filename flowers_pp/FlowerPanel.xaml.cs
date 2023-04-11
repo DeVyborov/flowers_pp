@@ -66,7 +66,7 @@ namespace flowers_pp
                 flower_photo = form_flower_photo;
                 flower_price = form_flower_price;
 
-                title_price.Text = flower_price;
+                title_price.Text = flower_price + " рублей";
                 title_flower.Text = flower_name;
                 photo_category.Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "/PreviewFlower/" + flower_photo, UriKind.Absolute));
             }
