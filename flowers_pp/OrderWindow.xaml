@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:flowers_pp"
         mc:Ignorable="d"
+        Closed="Window_Closed"
         Loaded="Window_Loaded"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -13,13 +14,13 @@
         <Grid>
             <Border Height="50" VerticalAlignment="Top" Background="#7F000000"/>
             <TextBlock Text="ЦВЕТУЧЕНО" HorizontalAlignment="Center" Margin="0 10 0 0" Foreground="White" FontSize="20" VerticalAlignment="Top" FontFamily="Rockwell Extra"/>
-            <Button x:Name="btn_vk" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
+            <Button x:Name="btn_vk" Click="btn_vk_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
                 <Image x:Name="photo_vk" Stretch="Fill" Source="/Assets/4102593_applications_media_social_vk_icon.png"/>
             </Button>
-            <Button x:Name="btn_inst" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="70 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
+            <Button x:Name="btn_inst" Click="btn_inst_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="70 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
                 <Image x:Name="photo_inst" Stretch="Fill" Source="/Assets/4102579_applications_instagram_media_social_icon.png"/>
             </Button>
-            <Button x:Name="btn_telegram" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="120 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
+            <Button x:Name="btn_telegram" Click="btn_telegram_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="120 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
                 <Image x:Name="photo_tg" Stretch="Fill" Source="/Assets/986956_telegram_icon.png"/>
             </Button>
 
@@ -41,20 +42,20 @@
                 <TextBlock Text="Отчетство:" Margin="30 115 0 0" HorizontalAlignment="Left" Foreground="Black" FontSize="16" VerticalAlignment="Top" FontFamily="Rockwell Extra "/>
                 <TextBox x:Name="patronymic_field" Margin="30 135 0 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
                 <TextBlock Text="Телефон:" Margin="30 170 0 0" HorizontalAlignment="Left" Foreground="Black" FontSize="16" VerticalAlignment="Top" FontFamily="Rockwell Extra "/>
-                <TextBox x:Name="phone_field" Margin="30 190 0 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
+                <TextBox x:Name="phone_field" PreviewTextInput="phone_field_PreviewTextInput" Margin="30 190 0 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
                 <TextBlock Text="E-mail:" Margin="30 225 0 0" HorizontalAlignment="Left" Foreground="Black" FontSize="16" VerticalAlignment="Top" FontFamily="Rockwell Extra "/>
                 <TextBox x:Name="email_field" Margin="30 245 0 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Left" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
 
                 <TextBlock Text="Улица:" Margin="0 5 330 0" HorizontalAlignment="Right" Foreground="Black" FontSize="16" VerticalAlignment="Top" FontFamily="Rockwell Extra "/>
                 <TextBox x:Name="street_field" Margin="0 25 30 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Right" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
                 <TextBlock Text="Дом:" Margin="0 60 340 0" HorizontalAlignment="Right" Foreground="Black" FontSize="16" VerticalAlignment="Top" FontFamily="Rockwell Extra "/>
-                <TextBox x:Name="house_field" Margin="0 80 30 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Right" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
+                <TextBox x:Name="house_field" PreviewTextInput="house_field_PreviewTextInput"  Margin="0 80 30 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Right" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
                 <TextBlock Text="Квартира:" Margin="0 115 305 0" HorizontalAlignment="Right" Foreground="Black" FontSize="16" VerticalAlignment="Top" FontFamily="Rockwell Extra "/>
-                <TextBox x:Name="apartment_field" Margin="0 135 30 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Right" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
+                <TextBox x:Name="apartment_field" PreviewTextInput="apartment_field_PreviewTextInput"  Margin="0 135 30 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Right" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
                 <TextBlock Text="Подъезд:" Margin="0 170 310 0" HorizontalAlignment="Right" Foreground="Black" FontSize="16" VerticalAlignment="Top" FontFamily="Rockwell Extra "/>
-                <TextBox x:Name="ex_field" Margin="0 190 30 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Right" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
+                <TextBox x:Name="ex_field" PreviewTextInput="ex_field_PreviewTextInput"  Margin="0 190 30 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Right" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
                 <TextBlock Text="Этаж:" Margin="0 225 335 0" HorizontalAlignment="Right" Foreground="Black" FontSize="16" VerticalAlignment="Top" FontFamily="Rockwell Extra "/>
-                <TextBox x:Name="floor_field" Margin="0 245 30 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Right" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
+                <TextBox x:Name="floor_field" PreviewTextInput="floor_field_PreviewTextInput"  Margin="0 245 30 0" Width="350" VerticalAlignment="Top" HorizontalAlignment="Right" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1" Background="White"/>
 
                 <TextBlock Text="Стоимость: 0 рублей" x:Name="final_summ" Margin="30 0 0 70" HorizontalAlignment="Left" Foreground="Black" FontSize="12" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold"/>
                 <TextBlock Text="Скидка: 0 рублей" Margin="30 0 0 50" HorizontalAlignment="Left" Foreground="Black" FontSize="12" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold"/>

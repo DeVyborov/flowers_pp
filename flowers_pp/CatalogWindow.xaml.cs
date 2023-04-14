@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
+using baseDLL;
 
 namespace flowers_pp
 {
@@ -25,7 +28,13 @@ namespace flowers_pp
         {
             try
             {
-                ChangeSelect(type_list, category_list);              
+                ChangeSelect(type_list, category_list);
+
+                RegistryKey currentUserKey = Registry.CurrentUser;
+                RegistryKey helloKey = currentUserKey.CreateSubKey("LoginInfo_PP");
+                helloKey.SetValue("login", StaticVars.Login);
+                helloKey.SetValue("password", StaticVars.Password);
+                helloKey.Close();
             }
             catch (Exception ex)
             {
@@ -124,6 +133,28 @@ namespace flowers_pp
             {
                 ChangeSelect("3", "");
             }           
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.Hide();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
+
+        private void btn_vk_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://vk.com/syrprizko");
+        }
+
+        private void btn_inst_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://www.instagram.com/teddyflowers_perm/");
+        }
+
+        private void btn_telegram_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://web.telegram.org/");
         }
 
         private void change_block_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)

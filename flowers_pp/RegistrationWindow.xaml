@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:flowers_pp"
         mc:Ignorable="d"
+        Closed="Window_Closed"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Title="Цветучено" Height="450" Width="800" Icon="/Assets/406865_flower_icon.png">
@@ -31,9 +32,9 @@
                 <TextBlock Text="Введите логин:" Margin="0 0 170 80" HorizontalAlignment="Center" Foreground="Black" FontSize="16" VerticalAlignment="Center" FontFamily="Rockwell Extra "/>
                 <TextBox x:Name="login_field" Margin="0 0 0 30" Width="280" HorizontalAlignment="Center" Height="28" TextAlignment="Left" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1"/>
                 <TextBlock Text="Введите пароль:" Margin="0 60 160 30" HorizontalAlignment="Center" Foreground="Black" FontSize="16" VerticalAlignment="Center" FontFamily="Rockwell Extra "/>
-                <TextBox x:Name="password_field" Margin="0 110 0 30"  Width="280" HorizontalAlignment="Center" Height="28" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1"/>
+                <PasswordBox x:Name="password_field" Margin="0 110 0 30"  Width="280" HorizontalAlignment="Center" Height="28" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1"/>
                 <TextBlock Text="Повторите пароль:" Margin="0 165 140 30" HorizontalAlignment="Center" Foreground="Black" FontSize="16" VerticalAlignment="Center" FontFamily="Rockwell Extra "/>
-                <TextBox x:Name="password_rec_field" Margin="0 220 0 30"  Width="280" HorizontalAlignment="Center" Height="28" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1"/>
+                <PasswordBox x:Name="password_rec_field" Margin="0 220 0 30"  Width="280" HorizontalAlignment="Center" Height="28" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Cursor="Hand" BorderThickness="1"/>
             </Grid>
             <Grid x:Name="case_user_info" Visibility="Hidden">
                 <TextBlock Text="Введите фамилию:" Margin="0 0 140 80" HorizontalAlignment="Center" Foreground="Black" FontSize="16" VerticalAlignment="Center" FontFamily="Rockwell Extra "/>

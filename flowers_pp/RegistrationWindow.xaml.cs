@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using baseDLL;
 
 namespace flowers_pp
 {
@@ -61,9 +53,9 @@ namespace flowers_pp
         {
             if (case_prog_info.Visibility == Visibility.Visible)
             {
-                if (login_field.Text != "" && password_field.Text != "" && password_rec_field.Text != "")
+                if (login_field.Text != "" && password_field.Password != "" && password_rec_field.Password != "")
                 {
-                    if (password_field.Text == password_rec_field.Text)
+                    if (password_field.Password == password_rec_field.Password)
                     {
                         case_prog_info.Visibility = Visibility.Hidden;
                         case_user_info.Visibility = Visibility.Visible;
@@ -107,44 +99,51 @@ namespace flowers_pp
                 {
                     try
                     {
-                        int gender = 1;
-
-                        if (radio_female.IsChecked == true)
+                        if (password_field.Password.Length < 8)
                         {
-                            gender = 2;
+                            Notification.Notify("Произошла ошибка", "Пожалуйста укажите пароль из 8 и более символов!");
                         }
+                        else
+                        {
+                            int gender = 1;
 
-                        string date_time = birthday_field.Text;
-                        DateTime date = Convert.ToDateTime(date_time.Replace("00:00:0000", ""));
-                        string normal_date = Convert.ToString(date);
-                        string rez_date = normal_date[6] + "" + normal_date[7] + "" + normal_date[8] + "" + normal_date[9] + "-" + normal_date[3] + "" + normal_date[4] + "-" + normal_date[0] + "" + normal_date[1];
+                            if (radio_female.IsChecked == true)
+                            {
+                                gender = 2;
+                            }
 
-                        SQLclass.Insert("INSERT INTO users(login, password, first_name, name, last_name, phone, date_of_birth, gender, roll)" +
-                        " VALUES(N'" + login_field.Text + "'," +
-                        "N'" + password_field.Text + "'," +
-                        "N'" + family_field.Text + "'," +
-                        "'" + name_field.Text + "'," +
-                        "'" + patronymic_field.Text + "'," +
-                        "'" + phone_field.Text + "'," +
-                        "N'" + rez_date + "'," +
-                        "'" + gender.ToString() + "'," +
-                        "N'0')");
+                            string date_time = birthday_field.Text;
+                            DateTime date = Convert.ToDateTime(date_time.Replace("00:00:0000", ""));
+                            string normal_date = Convert.ToString(date);
+                            string rez_date = normal_date[6] + "" + normal_date[7] + "" + normal_date[8] + "" + normal_date[9] + "-" + normal_date[3] + "" + normal_date[4] + "-" + normal_date[0] + "" + normal_date[1];
 
-                        string user_reg = SQLclass.Select("SELECT id FROM users WHERE login = '" + login_field.Text + "'")[0];
+                            SQLclass.Insert("INSERT INTO users(login, password, first_name, name, last_name, phone, date_of_birth, gender, roll)" +
+                            " VALUES(N'" + login_field.Text + "'," +
+                            "N'" + password_field.Password + "'," +
+                            "N'" + family_field.Text + "'," +
+                            "'" + name_field.Text + "'," +
+                            "'" + patronymic_field.Text + "'," +
+                            "'" + phone_field.Text + "'," +
+                            "N'" + rez_date + "'," +
+                            "'" + gender.ToString() + "'," +
+                            "N'0')");
 
-                        SQLclass.Insert("INSERT INTO address(id_user, street, house, room, porch, floor)" +
-                        " VALUES(N'" + user_reg + "'," +
-                        "N'" + street_field.Text + "'," +
-                        "N'" + house_field.Text + "'," +
-                        "'" + room_field.Text + "'," +
-                        "'" + ex_field.Text + "'," +
-                        "N'" + floor_field.Text + "')");
+                            string user_reg = SQLclass.Select("SELECT id FROM users WHERE login = '" + login_field.Text + "'")[0];
 
-                        Notification.Notify("Поздравляем", "Вы успешно зарегистрировали новый аккаунт!");
+                            SQLclass.Insert("INSERT INTO address(id_user, street, house, room, porch, floor)" +
+                            " VALUES(N'" + user_reg + "'," +
+                            "N'" + street_field.Text + "'," +
+                            "N'" + house_field.Text + "'," +
+                            "'" + room_field.Text + "'," +
+                            "'" + ex_field.Text + "'," +
+                            "N'" + floor_field.Text + "')");
 
-                        this.Hide();
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.Show();
+                            Notification.Notify("Поздравляем", "Вы успешно зарегистрировали новый аккаунт!");
+
+                            this.Hide();
+                            MainWindow mainWindow = new MainWindow();
+                            mainWindow.Show();
+                        }                       
                     }
                     catch (Exception ex)
                     {
@@ -208,7 +207,7 @@ namespace flowers_pp
 
         private void phone_field_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = "0123456789".IndexOf(e.Text) < 0;
+            e.Handled = "+0123456789".IndexOf(e.Text) < 0;
         }
 
         private void house_field_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -229,6 +228,13 @@ namespace flowers_pp
         private void TextBlock_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = "0123456789".IndexOf(e.Text) < 0;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.Close();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }

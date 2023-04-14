@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:flowers_pp"
         mc:Ignorable="d"
+        Closed="Window_Closed"
         Loaded="Window_Loaded"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -13,13 +14,13 @@
         <Grid>
             <Border Height="50" VerticalAlignment="Top" Background="#7F000000"/>
             <TextBlock Text="ЦВЕТУЧЕНО" HorizontalAlignment="Center" Margin="0 10 0 0" Foreground="White" FontSize="20" VerticalAlignment="Top" FontFamily="Rockwell Extra"/>
-            <Button x:Name="btn_vk" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
+            <Button x:Name="btn_vk" Click="btn_vk_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
                 <Image x:Name="photo_vk" Stretch="Fill" Source="/Assets/4102593_applications_media_social_vk_icon.png"/>
             </Button>
-            <Button x:Name="btn_inst" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="70 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
+            <Button x:Name="btn_inst" Click="btn_inst_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="70 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
                 <Image x:Name="photo_inst" Stretch="Fill" Source="/Assets/4102579_applications_instagram_media_social_icon.png"/>
             </Button>
-            <Button x:Name="btn_telegram" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="120 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
+            <Button x:Name="btn_telegram" Click="btn_telegram_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="120 5 0 0" Background="Transparent" Style="{StaticResource visible_button}" Height="35px" Width="35px" Cursor="Hand">
                 <Image x:Name="photo_tg" Stretch="Fill" Source="/Assets/986956_telegram_icon.png"/>
             </Button>
 

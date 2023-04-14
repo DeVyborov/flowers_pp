@@ -1,17 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using baseDLL;
 
 namespace flowers_pp
 {
@@ -28,12 +19,9 @@ namespace flowers_pp
 
         private void btn_registration_Click(object sender, RoutedEventArgs e)
         {
-            //this.Hide();
-            //RegistrationWindow registrationWindow = new RegistrationWindow();
-            //registrationWindow.Show();
-
-            login_field.Text = "vyborov";
-            password_field.Password = "123123";
+            this.Hide();
+            RegistrationWindow registrationWindow = new RegistrationWindow();
+            registrationWindow.Show();
         }
 
         private void btn_sign_Click(object sender, RoutedEventArgs e)
@@ -56,6 +44,9 @@ namespace flowers_pp
                             Notification.Notify("", "Добро пожаловать!");
                             SQLclass.CloseConnection();
 
+                            StaticVars.Login = login_field.Text;
+                            StaticVars.Password = password_field.Password;
+
                             this.Hide();
                             CatalogWindow catalogWindow = new CatalogWindow("1","");
                             catalogWindow.Show();
@@ -63,11 +54,13 @@ namespace flowers_pp
                         else
                         {
                             Notification.Notify("Произошла ошибка", "Вы указали неверный пароль!");
+                            FailLogin();
                         }
                     }
                     else
                     {
-                        Notification.Notify("Произошла ошибка", "Аккаунт с данным логином не найден в системе!"); 
+                        Notification.Notify("Произошла ошибка", "Аккаунт с данным логином не найден в системе!");
+                        FailLogin();
                     }
                 }
                 else
@@ -80,9 +73,32 @@ namespace flowers_pp
             }
         }
 
+        public void FailLogin()
+        {
+            RegistryKey currentUserKey = Registry.CurrentUser;
+            RegistryKey helloKey = currentUserKey.CreateSubKey("LoginInfo_PP");
+            helloKey.SetValue("login", "");
+            helloKey.SetValue("password", "");
+            helloKey.Close();
+        }
+
         private void Window_Closed(object sender, EventArgs e)
         {
             SQLclass.CloseConnection();
+            Application.Current.Shutdown();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            RegistryKey currentUserKey = Registry.CurrentUser;
+            RegistryKey helloKey = currentUserKey.OpenSubKey("LoginInfo_PP");
+
+            if (helloKey.GetValue("login").ToString() != "")
+            {
+                login_field.Text = helloKey.GetValue("login").ToString();
+                password_field.Password = helloKey.GetValue("password").ToString();
+            }
+            helloKey.Close();
         }
     }
 }
