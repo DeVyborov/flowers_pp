@@ -19,6 +19,8 @@ namespace flowers_pp
             InitializeComponent();
         }
 
+        public TextBox change_list;
+
         private void btn_basket_MouseEnter(object sender, MouseEventArgs e)
         {
             back_main.Background = new SolidColorBrush(Color.FromRgb(88,85,79));
@@ -31,8 +33,8 @@ namespace flowers_pp
 
         private void btn_basket_Click(object sender, RoutedEventArgs e)
         {
-            CatalogWindow catalogWindow = new CatalogWindow("2", categoryId);
-            catalogWindow.UpdateData(categoryId);
+            change_list.Text = "";
+            change_list.Text = categoryId.ToString();
         }
 
         public CategoryPanel(string form_category_name, string form_category_photo, string form_category_id)

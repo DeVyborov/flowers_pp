@@ -12,5 +12,6 @@ namespace flowers_pp
 
         public static List<string> basket = new List<string>();
         public static int[] count_flower = new int[100];
+        public static int summ = 0;
     }
 }

@@ -7,9 +7,12 @@ namespace flowers_pp
     /// <summary>
     /// Логика взаимодействия для CatalogWindow.xaml
     /// </summary>
+    /// 
+
     public partial class CatalogWindow : Window
     {
         string type_list, category_list = "";
+
         public CatalogWindow(string form_type, string form_category)
         {
             InitializeComponent();
@@ -40,17 +43,19 @@ namespace flowers_pp
                 for (int i = 0; i < services_category.Count; i += 3)
                 {
                     CategoryPanel categoryPanel = new CategoryPanel(services_category[i + 1], services_category[i + 2], services_category[i]);
+                    categoryPanel.change_list = this.change_block;
                     Fr.Children.Add(categoryPanel);
                 }
             }
             else if (type == "2") // flower
-            {        
+            {
                 btn_exit.Visibility = Visibility.Visible;
                 List<string> services_flower = SQLclass.Select($"SELECT * FROM [dbo].[items] WHERE id_categories = '" + catregory + "'");
 
                 for (int i = 0; i < services_flower.Count; i += 5)
                 {
                     FlowerPanel flowerPanel = new FlowerPanel(services_flower[i], services_flower[i + 1], services_flower[i + 2], services_flower[i + 3]);
+                    flowerPanel.summ = this.summ_basket;
                     Fr.Children.Add(flowerPanel);
                 }
             }
@@ -59,7 +64,33 @@ namespace flowers_pp
 
         private void btn_exit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            ChangeSelect("1", "");
+            btn_exit.Visibility = Visibility.Hidden;
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            summ_basket.Text = "Корзина ("+ StaticVars.summ +")";
+        }
+
+        private void btn_basket_Click(object sender, RoutedEventArgs e)
+        {
+            if (StaticVars.summ > 0)
+            {
+                MessageBox.Show("вход в корзину");
+            }
+            else
+                Notification.Notify("Произошла ошибка", "В вашей корзине нет товаров!");
+        }
+
+        private void btn_test_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeSelect(type_list,category_list);
+        }
+
+        private void change_block_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            ChangeSelect("2", change_block.Text);
         }
 
         public void UpdateData(string category_id)
