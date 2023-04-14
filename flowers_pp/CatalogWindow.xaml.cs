@@ -12,6 +12,7 @@ namespace flowers_pp
     public partial class CatalogWindow : Window
     {
         string type_list, category_list = "";
+        bool goto_bucket = false;
 
         public CatalogWindow(string form_type, string form_category)
         {
@@ -38,6 +39,7 @@ namespace flowers_pp
             SQLclass.OpenConnection();
             if (type == "1") // catalog
             {
+                summ_basket.Text = "Корзина(" + StaticVars.summ + ")";
                 List<string> services_category = SQLclass.Select($"SELECT * FROM [dbo].[categories]");
 
                 for (int i = 0; i < services_category.Count; i += 3)
@@ -49,14 +51,42 @@ namespace flowers_pp
             }
             else if (type == "2") // flower
             {
+                summ_basket.Text = "Корзина(" + StaticVars.summ + ")";
                 btn_exit.Visibility = Visibility.Visible;
                 List<string> services_flower = SQLclass.Select($"SELECT * FROM [dbo].[items] WHERE id_categories = '" + catregory + "'");
 
                 for (int i = 0; i < services_flower.Count; i += 5)
                 {
-                    FlowerPanel flowerPanel = new FlowerPanel(services_flower[i], services_flower[i + 1], services_flower[i + 2], services_flower[i + 3]);
+                    FlowerPanel flowerPanel = new FlowerPanel(services_flower[i], services_flower[i + 1], services_flower[i + 2], services_flower[i + 3], "1");
                     flowerPanel.summ = this.summ_basket;
                     Fr.Children.Add(flowerPanel);
+                }
+            }
+            else if (type == "3") // basket
+            {
+                btn_exit.Visibility = Visibility.Visible;
+                List<string> services_flower = SQLclass.Select($"SELECT * FROM [dbo].[items]");
+
+                for (int i = 0; i < services_flower.Count; i += 5)
+                {
+                    FlowerPanel flowerPanel = new FlowerPanel(services_flower[i], services_flower[i + 1], services_flower[i + 2], services_flower[i + 3], "2");
+                    flowerPanel.summ = this.summ_basket;
+                    flowerPanel.select = this.change_backet;
+
+                    if (StaticVars.basket.Count == 0)
+                    {
+                        ChangeSelect("1", "");                        
+                    }
+                    else
+                    {
+                        for (int y = 0; y < StaticVars.basket.Count; y++)
+                        {
+                            if (StaticVars.basket[y] == services_flower[i])
+                            {
+                                Fr.Children.Add(flowerPanel);
+                            }
+                        }
+                    }                   
                 }
             }
             SQLclass.CloseConnection();
@@ -65,39 +95,43 @@ namespace flowers_pp
         private void btn_exit_Click(object sender, RoutedEventArgs e)
         {
             ChangeSelect("1", "");
+            summ_basket.Text = "Корзина(" + StaticVars.summ + ")";
             btn_exit.Visibility = Visibility.Hidden;
-        }
-
-        private void Window_Activated(object sender, EventArgs e)
-        {
-            summ_basket.Text = "Корзина ("+ StaticVars.summ +")";
+            goto_bucket = false;
         }
 
         private void btn_basket_Click(object sender, RoutedEventArgs e)
         {
-            if (StaticVars.summ > 0)
+            if (goto_bucket == true)
             {
-                MessageBox.Show("вход в корзину");
+                this.Hide();
+                OrderWindow orderWindow = new OrderWindow();
+                orderWindow.Show();
+            }
+            else if (StaticVars.summ > 0)
+            {
+                ChangeSelect("3", "");
+                summ_basket.Text = "Оформить(" + StaticVars.summ + ")";
+                goto_bucket = true;
             }
             else
-                Notification.Notify("Произошла ошибка", "В вашей корзине нет товаров!");
+                Notification.Notify("Произошла ошибка", "В вашей корзине нет товаров");
         }
 
-        private void btn_test_Click(object sender, RoutedEventArgs e)
+        private void change_backet_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            ChangeSelect(type_list,category_list);
+            if (change_backet.Text.Length >= 1)
+            {
+                ChangeSelect("3", "");
+            }           
         }
 
         private void change_block_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            ChangeSelect("2", change_block.Text);
-        }
-
-        public void UpdateData(string category_id)
-        {
-            this.Close();
-            CatalogWindow catalog = new CatalogWindow("2", category_id);
-            catalog.ShowDialog();
+            if (change_block.Text.Length >= 1)
+            {
+                ChangeSelect("2", change_block.Text);
+            }
         }
     }
 }

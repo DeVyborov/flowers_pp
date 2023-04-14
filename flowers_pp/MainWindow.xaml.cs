@@ -28,9 +28,12 @@ namespace flowers_pp
 
         private void btn_registration_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            RegistrationWindow registrationWindow = new RegistrationWindow();
-            registrationWindow.Show();
+            //this.Hide();
+            //RegistrationWindow registrationWindow = new RegistrationWindow();
+            //registrationWindow.Show();
+
+            login_field.Text = "vyborov";
+            password_field.Password = "123123";
         }
 
         private void btn_sign_Click(object sender, RoutedEventArgs e)
