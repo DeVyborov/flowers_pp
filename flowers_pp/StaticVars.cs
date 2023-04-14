@@ -10,6 +10,7 @@ namespace flowers_pp
     {
         public static string UserId = null;
 
-        
+        public static List<string> basket = new List<string>();
+        public static int[] count_flower = new int[100];
     }
 }

@@ -16,7 +16,7 @@
 
             <TextBox x:Name="count_field" Width="120" HorizontalAlignment="Center" Height="28" TextAlignment="Center" IsReadOnly="True" TextWrapping="NoWrap" FontFamily="Rockwell Extra" FontSize="16" Foreground="Black" Background="White" Text="0" Cursor="Hand" BorderThickness="1" Margin="0,246,0,46"/>
 
-            <Button Style="{StaticResource visible_button}" Name="btn_minus" Click="btn_minus_Click" Cursor="Hand" Height="28" Width="40" HorizontalAlignment="Left" Margin="20 200 0 0">
+            <Button Style="{StaticResource visible_button}" Name="btn_minus" Click="btn_minus_Click" IsEnabled="False" Cursor="Hand" Height="28" Width="40" HorizontalAlignment="Left" Margin="20 200 0 0">
                 <Grid>
                     <Border Background="#FF39FF29" Height="28" Width="40" HorizontalAlignment="Center"/>
                     <TextBlock VerticalAlignment="Center" Background="Transparent" Text="-" FontFamily="Montserrat" FontWeight="SemiBold" FontSize="16" Foreground="Black" TextAlignment="Center"  Cursor="Hand"/>
@@ -32,8 +32,8 @@
 
             <Button Style="{StaticResource visible_button}" Name="btn_add" Click="btn_add_Click" Cursor="Hand" Height="30" Width="210" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 10">
                 <Grid>
-                    <Border Background="#FF39FF29" Height="30" Width="210" HorizontalAlignment="Center"/>
-                    <TextBlock VerticalAlignment="Center" Background="Transparent" Text="В корзину" FontFamily="Montserrat" FontWeight="SemiBold" FontSize="16" Foreground="Black" TextAlignment="Center"  Cursor="Hand"/>
+                    <Border x:Name="background_basket" Background="#FF39FF29" Height="30" Width="210" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="btn_text"  VerticalAlignment="Center" Background="Transparent" Text="В корзину" FontFamily="Montserrat" FontWeight="SemiBold" FontSize="16" Foreground="Black" TextAlignment="Center"  Cursor="Hand"/>
                 </Grid>
             </Button>
         </Grid>

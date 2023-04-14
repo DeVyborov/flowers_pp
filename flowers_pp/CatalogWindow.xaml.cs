@@ -21,34 +21,7 @@ namespace flowers_pp
         {
             try
             {
-                SQLclass.OpenConnection();
-
-                if (type_list == "1") // catalog
-                {
-                    Fr.Children.Clear();
-                    List<string> services = SQLclass.Select($"SELECT * FROM [dbo].[categories]");
-
-                    for (int i = 0; i < services.Count; i += 3)
-                    {
-                        CategoryPanel categoryPanel = new CategoryPanel(services[i + 1], services[i + 2], services[i]);
-                        Fr.Children.Add(categoryPanel);
-                    }
-                }
-                else if (type_list == "2") // flower
-                {
-                    Fr.Children.Clear();
-                    List<string> services = SQLclass.Select($"SELECT * FROM [dbo].[items] WHERE id_categories = '" + category_list + "'");
-
-                    for (int i = 0; i < services.Count; i += 5)
-                    {
-                        FlowerPanel flowerPanel = new FlowerPanel(services[i], services[i + 1], services[i + 2], services[i + 3]);
-                        Fr.Children.Add(flowerPanel);
-                    }
-                }
-                else
-                    MessageBox.Show("Error");
-
-                SQLclass.CloseConnection();
+                ChangeSelect(type_list, category_list);              
             }
             catch (Exception ex)
             {
@@ -56,11 +29,44 @@ namespace flowers_pp
             }
         }
 
+        public void ChangeSelect(string type,string catregory)
+        {
+            Fr.Children.Clear();
+            SQLclass.OpenConnection();
+            if (type == "1") // catalog
+            {
+                List<string> services_category = SQLclass.Select($"SELECT * FROM [dbo].[categories]");
+
+                for (int i = 0; i < services_category.Count; i += 3)
+                {
+                    CategoryPanel categoryPanel = new CategoryPanel(services_category[i + 1], services_category[i + 2], services_category[i]);
+                    Fr.Children.Add(categoryPanel);
+                }
+            }
+            else if (type == "2") // flower
+            {        
+                btn_exit.Visibility = Visibility.Visible;
+                List<string> services_flower = SQLclass.Select($"SELECT * FROM [dbo].[items] WHERE id_categories = '" + catregory + "'");
+
+                for (int i = 0; i < services_flower.Count; i += 5)
+                {
+                    FlowerPanel flowerPanel = new FlowerPanel(services_flower[i], services_flower[i + 1], services_flower[i + 2], services_flower[i + 3]);
+                    Fr.Children.Add(flowerPanel);
+                }
+            }
+            SQLclass.CloseConnection();
+        }
+
+        private void btn_exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         public void UpdateData(string category_id)
         {
             this.Close();
             CatalogWindow catalog = new CatalogWindow("2", category_id);
-            catalog.Show();
+            catalog.ShowDialog();
         }
     }
 }
