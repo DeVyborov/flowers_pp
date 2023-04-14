@@ -19,6 +19,7 @@ namespace flowers_pp
         }
 
         string title_tovar = "";
+        int result_price = 0;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -47,6 +48,8 @@ namespace flowers_pp
                 MessageBox.Show(ex.Message);
             }
         }
+
+        
 
         private void btn_create_order_Click(object sender, RoutedEventArgs e)
         {
